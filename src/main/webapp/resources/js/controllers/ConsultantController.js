@@ -4,18 +4,18 @@
  * CarController
  * @constructor
  */
-var CarController = function($scope, $http) {
-    $scope.fetchCarsList = function() {
-        $http.get('cars/carlist.json').success(function(carList){
-            $scope.cars = carList;
+var ConsultantController = function($scope, $http) {
+    $scope.fetchConsultantsList = function() {
+        $http.get('consultants/consultantlist.json').success(function(consultantList){
+            $scope.consultants = consultantList;
         });
     };
 
     $scope.addNewCar = function(newCar) {
         $http.post('cars/addCar/' + newCar).success(function() {
-            $scope.fetchCarsList();
+            $scope.fetchConsultantsList();
         });
-        $scope.carName = '';
+        $scope.consultantName = '';
     };
 
     $scope.removeCar = function(car) {

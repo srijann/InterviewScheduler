@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nepal.beans.Vendor;
+
 @Service
 public class PersistenceServiceImpl implements PersistenceService {
 
@@ -24,10 +26,16 @@ public class PersistenceServiceImpl implements PersistenceService {
 	public void addEntity(Object entity) {
 		getSession().save(entity);
 	}
+	
+	public void deleteEntity(Object entity) {
+		 getSession().delete(entity);	
+				
+	}
 
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<T> entityClass, Long id) {
 		return (T)getSession().get(entityClass, id);
 	}
 
+	
 }

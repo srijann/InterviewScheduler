@@ -8,6 +8,7 @@ import com.nepal.beans.Vendor;
 public interface VendorDao {
 
 	List<Vendor> getAllVendors();
-	Vendor getVendor(Long id);
+	void deleteVendor(Vendor vendor);
+	void addVendor(Vendor vendor);
 
 }
