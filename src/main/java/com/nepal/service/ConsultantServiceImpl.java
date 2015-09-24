@@ -2,6 +2,7 @@ package com.nepal.service;
 
 import java.util.Calendar;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,14 @@ public class ConsultantServiceImpl implements ConsultantService {
 		consultant.setPhone("303-344-4799");
 		consultant.setYrsExp(6.5D);
 		persistenceService.addEntity(consultant);
+	}
+
+	@Transactional
+	public Consultant getConsultantById(Long id) {
+		Consultant consultant = persistenceService.get(Consultant.class, id);
+		Hibernate.initialize(consultant.getConsultantClient());
+		Hibernate.initialize(consultant.getVendors());
+		return consultant;
 	}
 
 	

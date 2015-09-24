@@ -1,25 +1,55 @@
-'use strict';
+var interviewSchedulerApp = angular.module('interviewSchedulerApp', ['ui.router']);
 
-var AngularSpringApp = {};
+interviewSchedulerApp.config(function($stateProvider, $urlRouterProvider) {
 
-var App = angular.module('AngularSpringApp', ['AngularSpringApp.filters', 'AngularSpringApp.services', 'AngularSpringApp.directives']);
+	$urlRouterProvider.otherwise('/home');
 
-// Declare app level module which depends on filters, and services
-App.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/consultants', {
-        templateUrl: 'cars/layout',
-        controller: CarController
-    });
+	$stateProvider
 
-    $routeProvider.when('/trains', {
-        templateUrl: 'trains/layout',
-        controller: TrainController
-    });
-    
-    $routeProvider.when('/railwaystations', {
-        templateUrl: 'railwaystations/layout',
-        controller: RailwayStationController
-    });
+	// HOME STATES AND NESTED VIEWS ========================================
+	.state('home', {
+		url: '/home',
+		templateUrl: 'resources/html/home/home.html'
+	})
 
-    $routeProvider.otherwise({redirectTo: '/cars'});
-}]);
+	// ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+	.state('about', {
+		url: '/about',
+		templateUrl: 'resources/html/about/about.html'   
+	})
+
+	.state('contact', {
+		url: '/contact',
+		templateUrl: 'resources/html/contact/contact.html'
+
+	})
+	.state('consultants', {
+		url: '/consultants',
+		templateUrl: 'resources/html/consultant/consultant.html',
+		controller: 'consultantController',
+		resolve: {
+			/*message: function(consultantService){
+				var message = consultantService.getMessage();
+				console.log('state :', message);
+				return message;
+			}*/
+			/*message : function() {
+				console.log('inside state');
+				return {value : 'Hello!'};
+			}*/
+			consultantsData : ['consultantService', function(consultantService){
+				return consultantService.fetchAllConsultants();
+			}]
+		}
+
+	})
+	.state('vendors',{
+		url: '/vendors',
+		templateUrl: 'resources/html/vendor/vendor.html'
+
+	})
+	.state('login',{
+
+	});
+
+});
