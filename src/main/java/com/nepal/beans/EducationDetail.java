@@ -35,8 +35,8 @@ public class EducationDetail {
 	@Column(name="graduated_year", length=4, nullable=false)
 	private Long graduateYear;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "educationDetail")
-	private Set<Consultant> consultants = new HashSet<Consultant>();
+	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "educationDetail")
+	private Set<Consultant> consultants = new HashSet<Consultant>();*/
 
 	/**
 	 * @return the id
@@ -97,16 +97,16 @@ public class EducationDetail {
 	/**
 	 * @return the consultants
 	 */
-	public Set<Consultant> getConsultants() {
+	/*public Set<Consultant> getConsultants() {
 		return consultants;
 	}
 
-	/**
+	*//**
 	 * @param consultants the consultants to set
-	 */
+	 *//*
 	public void setConsultants(Set<Consultant> consultants) {
 		this.consultants = consultants;
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -116,7 +116,7 @@ public class EducationDetail {
 		return "EducationDetail [id=" + id + ", institutionName="
 				+ institutionName + ", location=" + location
 				+ ", graduateYear=" + graduateYear + ", consultants="
-				+ consultants + "]";
+				/*+ consultants */+ "]";
 	}
 
 

@@ -18,23 +18,19 @@ public class VendorDaoImpl implements VendorDao {
 	
 	@Transactional
 	public List<Vendor> getAllVendors() {
-		saveVendor();
 		Query query = persistenceService.getSession().getNamedQuery("getAllVendors");
         @SuppressWarnings("unchecked")
 		List<Vendor> vendorList = (List<Vendor>)query.list();
 		return vendorList;
 	}
 
-	private void saveVendor() {
-		Vendor vendor = new Vendor();
-		vendor.setLocation("Denver");
-		vendor.setVendorName("Kushal INC");
-		persistenceService.addEntity(vendor);
+	@Transactional
+	public void deleteVendor(Vendor vendor) {
+		persistenceService.deleteEntity(vendor);	
 	}
-
-	@Transactional( readOnly = true)
-	public Vendor getVendor(Long id) {
-		return persistenceService.get(Vendor.class, id);
+	@Transactional
+	public void addVendor(Vendor vendor) {
+		persistenceService.addEntity(vendor);
 	}
 
 }

@@ -6,12 +6,17 @@ com\nepal\beans\EducationDetail.class
 com\nepal\controller\IndexController.class
 com\nepal\service\VendorService.class
 com\nepal\beans\Consultant.class
+com\nepal\service\EducationDetailServiceImpl.class
 com\nepal\beans\Vendor.class
+com\nepal\dao\EducationDetailDaoImpl.class
 com\nepal\beans\Client.class
 com\nepal\dao\VendorDao.class
 com\nepal\service\PersistenceServiceImpl.class
 com\nepal\dao\VendorDaoImpl.class
+com\nepal\controller\ConsultantController.class
 com\nepal\service\PersistenceService.class
 com\nepal\beans\VendorContact.class
 com\nepal\dao\ConsultantDaoImpl.class
 com\nepal\dao\ConsultantDao.class
+com\nepal\service\EducationDetailService.class
+com\nepal\dao\EducationalDetailDao.class

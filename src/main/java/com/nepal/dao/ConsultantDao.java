@@ -8,7 +8,7 @@ public interface ConsultantDao {
 	
 	//Read Consultants
 	List<Consultant> getAllConsultant();
-	
-	Consultant getConsultant(Long id);
+	void addConsultant(Consultant consultant);
+	void deleteConsultant(Consultant consultant);
 
 }
