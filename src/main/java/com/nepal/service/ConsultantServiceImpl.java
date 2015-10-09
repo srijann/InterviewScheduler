@@ -2,6 +2,7 @@ package com.nepal.service;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class ConsultantServiceImpl implements ConsultantService {
 		persistenceService.addEntity(sr);*/
 		
 		
-		Consultant cons = persistenceService.get(Consultant.class, 1L);
-		System.out.println("cons: " + cons);
+		/*Consultant cons = persistenceService.get(Consultant.class, 2L);
+		System.out.println("cons: " + cons);*/
 		
 		/*EducationDetail ed = new EducationDetail();
 		ed.setConsultant(cons);
@@ -59,8 +60,8 @@ public class ConsultantServiceImpl implements ConsultantService {
 		consultant.setYrsExp(6.5D);
 		persistenceService.addEntity(consultant);*/
 		
-		Client client = persistenceService.get(Client.class, 2L);
-		System.out.println("client:" + client);
+		/*Client client = persistenceService.get(Client.class, 3L);
+		System.out.println("client:" + client);*/
 		
 	/*	ConsultantClient consultantClient = new ConsultantClient();
 		consultantClient.setClient(client);
@@ -80,8 +81,8 @@ public class ConsultantServiceImpl implements ConsultantService {
 		persistenceService.addEntity(consultantClient);*/
 		
 		
-		Vendor vendor = persistenceService.get(Vendor.class, 3L);
-		System.out.println("vendor:" + vendor);
+		/*Vendor vendor = persistenceService.get(Vendor.class, 4L);
+		System.out.println("vendor:" + vendor);*/
 		
 		/*Vendor vendor = new Vendor();
 		vendor.setVendorName("Nirish Consulting Company");
@@ -93,7 +94,7 @@ public class ConsultantServiceImpl implements ConsultantService {
 		client.setLocation("Des moines");
 		persistenceService.addEntity(client);*/
 		
-		Interview interview = new Interview();
+		/*Interview interview = new Interview();
 		interview.setConsultant(cons);
 		interview.setClient(client);
 		interview.setVendor(vendor);
@@ -105,7 +106,7 @@ public class ConsultantServiceImpl implements ConsultantService {
 		cldr.set(Calendar.HOUR_OF_DAY, 03);  
 		cldr.set(Calendar.MINUTE, 55);
 		interview.setDateTime(cldr);
-		persistenceService.addEntity(interview);
+		persistenceService.addEntity(interview);*/
 	}
 
 	@Transactional
@@ -119,6 +120,11 @@ public class ConsultantServiceImpl implements ConsultantService {
 		return consultant;
 	}
 
+	@Transactional
+	public List<Consultant> getAllConsultants(){
+		List<Consultant> getAll = (List<Consultant>)persistenceService.listEntity(Consultant.class);
+		return getAll;
+	}
 
 
 }

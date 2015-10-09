@@ -1,7 +1,9 @@
-var interviewSchedulerApp = angular.module('interviewSchedulerApp', ['ui.router']);
+var interviewSchedulerApp = angular.module('interviewSchedulerApp', ['ui.router', 'ngTouch', 'ui.grid','ui.grid.selection','ui.bootstrap', 'interviewSchedulerApp.directives']);
 
 interviewSchedulerApp.config(function($stateProvider, $urlRouterProvider) {
 
+	console.log('inside app.js cons state');
+	
 	$urlRouterProvider.otherwise('/home');
 
 	$stateProvider
@@ -26,38 +28,43 @@ interviewSchedulerApp.config(function($stateProvider, $urlRouterProvider) {
 	.state('consultants', {
 		url: '/consultants',
 		templateUrl: 'resources/html/consultant/consultant.html',
-		controller: 'consultant.controller',
+		controller: 'consultantController',
 		resolve: {
 			/*message: function(consultantService){
 				var message = consultantService.getMessage();
 				console.log('state :', message);
 				return message;
-			}*/
-			/*message : function() {
+			}
+			message : function() {
 				console.log('inside state');
 				return {value : 'Hello!'};
 			}*/
 			consultantsData : ['consultantService', function(consultantService){
-				return consultantService.fetchAllConsultants();
+				console.log('inside app.js consultants');
+				consultantService.fetchAllConsultants
+					return consultantService.fetchAllConsultants();
+				
 			}]
+			
 		}
 
 	})
 	.state('vendors',{
 		url: '/vendors',
-		templateUrl: 'resources/html/vendor/vendor.html'
+		templateUrl: 'resources/html/vendor/vendor.html',
+			controller: 'vendorController',
+			resolve: {
+				vendorsData : ['vendorService', function(vendorService){
+					console.log('inside app.js vendors', vendorService);
+					return vendorService.fetchAllVendors();
+				}]
+				
+			}	
 
 	})
+	
 	.state('login',{
-		url: '/login',
-		templateUrl:'resources/html/login/login.html',
-		controller: 'login.controller',
-		resolve: {
-			loginData : ['loginService', function(loginService){
-				return loginService.getUserInfo();
-			}]
-		}
-		
-	});
 
+	});
+	
 });

@@ -17,14 +17,12 @@ private static Logger logger = Logger.getLogger(ConsultantController.class);
 	@Autowired
 	PersistenceService persistenceService;
 	
-/*	@Autowired
+	/*@Autowired
 	UserService userService;*/
 	
-	/*@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public @ResponseBody String getUserInfo() throws JsonProcessingException{
 		return null;
-		
-		}*/
 	
 	}
-
+}
