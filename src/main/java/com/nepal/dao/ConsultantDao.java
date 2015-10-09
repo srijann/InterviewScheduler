@@ -8,7 +8,7 @@ public interface ConsultantDao {
 	
 	//Read Consultants
 	List<Consultant> getAllConsultant();
-	void addConsultant(Consultant consultant);
+	public boolean addEntity(Consultant consultant) throws Exception; 
 	void deleteConsultant(Consultant consultant);
 
 }

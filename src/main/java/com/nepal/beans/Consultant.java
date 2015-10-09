@@ -51,7 +51,7 @@ public class Consultant {
 	@Column(name="yrs_exp", length=10, nullable=true)
 	private Double yrsExp;
 
-	@OneToMany(mappedBy = "consultant", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "consultant", fetch = FetchType.EAGER)
 	private Set<ConsultantClient> consultantClient = new HashSet<ConsultantClient>();
 
 	@ManyToOne
@@ -59,7 +59,7 @@ public class Consultant {
 	@Cascade({CascadeType.ALL})
 	private EducationDetail educationDetail;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name="consultant_vendor", 
 			joinColumns={@JoinColumn(name="consultant_id", insertable = false, updatable = false)}, 

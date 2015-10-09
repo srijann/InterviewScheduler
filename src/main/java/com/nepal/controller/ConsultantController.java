@@ -32,15 +32,6 @@ public class ConsultantController {
 	@Autowired
 	ConsultantService consultantService;
 
-	/*@RequestMapping(value = "/consultants", method = RequestMethod.GET)
-	public @ResponseBody String getConsultant() throws JsonGenerationException, JsonMappingException, IOException{
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonString = mapper.writeValueAsString(consultantService.getAllConsultants());
-		System.out.println("NOT JSON: \n" + jsonString);
-		return jsonString;
-
-	}*/
-	
 	@RequestMapping(value = "/consultants", method = RequestMethod.GET)
 	public @ResponseBody List<Consultant> getConsultants(){
 		List<Consultant> consultants = consultantService.getAllConsultants();
@@ -48,7 +39,7 @@ public class ConsultantController {
 
 	}
 	
-	@RequestMapping(value = "/editConsultant", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/editConsultant", method = RequestMethod.POST)
 	public @ResponseBody String editConsultant(@RequestBody Consultant consultant){
 		System.out.println("inside edit consultant" +  consultant);
 		return null;

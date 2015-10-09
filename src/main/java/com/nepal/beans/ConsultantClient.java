@@ -30,7 +30,7 @@ public class ConsultantClient {
 	@Column(name="end_date", length=12, nullable=false)
 	private Date endDate;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "consultant_id")
 	private Consultant consultant;
 

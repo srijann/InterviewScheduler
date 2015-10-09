@@ -27,6 +27,18 @@ interviewSchedulerApp.service('consultantService', ['$http', '$q', function($htt
 			}
 			);	
 
+		},
+		deleteConsultants : function(deleteConsulatantsData){
+			console.log('cons serv : ' , deleteConsulatantsData);
+			$http.post('http://localhost:8080/InterviewScheduler/deleteConsultants', deleteConsulatantsData)
+			.success(function(deleteConsulatantsData, status, headers, config){
+				console.log('post delete servie hit'+deleteConsulatantsData);
+
+			}).error(function(deleteConsultantsData, status, headers, config) {
+				alert("Deleting failed");
+			}
+			);	
+
 		}
 
 	}
