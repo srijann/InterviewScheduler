@@ -1,7 +1,9 @@
 package com.nepal.service;
 
 import java.util.Calendar;
+import java.util.List;
 
+import com.nepal.dao.ConsultantDao;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,30 +15,11 @@ import com.nepal.beans.EducationDetail;
 @Service
 public class ConsultantServiceImpl implements ConsultantService {
 
+	@Autowired  
+	ConsultantDao consultantDao; 
 	@Autowired
 	PersistenceService persistenceService; 
 	
-	@Transactional
-	public void addConsultant() {
-		EducationDetail ed = new EducationDetail();
-		ed.setGraduateYear(2009L);
-		ed.setInstitutionName("Columbia");
-		ed.setLocation("Denver, CO");
-		Consultant consultant = new Consultant();
-		consultant.setName("Kushal");
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, 1984);
-		cal.set(Calendar.MONTH, 1);
-		cal.set(Calendar.DAY_OF_MONTH, 28);
-		consultant.setEducationDetail(ed);
-		consultant.setDob(cal.getTime());
-		consultant.setEmail("nrs@hotmail.com");
-		consultant.setSsn("443-30-8769");
-		consultant.setPhone("303-344-4799");
-		consultant.setYrsExp(6.5D);
-		persistenceService.addEntity(consultant);
-	}
-
 	@Transactional
 	public Consultant getConsultantById(Long id) {
 		Consultant consultant = persistenceService.get(Consultant.class, id);
@@ -44,6 +27,15 @@ public class ConsultantServiceImpl implements ConsultantService {
 		Hibernate.initialize(consultant.getVendors());
 		return consultant;
 	}
+	@Transactional
+	public List<Consultant> getAllConsultants(){
+		List<Consultant> getAll = (List<Consultant>)persistenceService.listEntity(Consultant.class);
+		return getAll;
+	}
+	@Transactional
+	 public boolean addEntity(Consultant consultant) throws Exception {  
+	  return consultantDao.addEntity(consultant);  
+	 }  
 
 	
 
