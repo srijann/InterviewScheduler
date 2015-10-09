@@ -1,8 +1,8 @@
 'use strict';
 
-/* Services */
+/* ConsultantServices */
 
-app.service("consultantService", ['$http', '$q', function($http, $q){
+interviewSchedulerApp.service("consultantService", ['$http', '$q', function($http, $q){
 	return {
 		fetchAllConsultants : function(){
 			return $http.get('http://localhost:8080/InterviewScheduler/consultants')
@@ -13,7 +13,7 @@ app.service("consultantService", ['$http', '$q', function($http, $q){
 					},
 
 					function(errResponse){
-						console.error('Error while fetching users');
+						console.error('Error while fetching consultants');
 						return $q.reject(errResponse);
 					}
 			);

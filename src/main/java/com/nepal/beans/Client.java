@@ -5,12 +5,17 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="client", 
@@ -30,6 +35,10 @@ public class Client {
 
 	@OneToMany(mappedBy = "client")
 	private Set<ConsultantClient> consultantClient = new HashSet<ConsultantClient>();
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "client")
+	@Cascade({CascadeType.ALL})
+	private Interview interview;
 
 	/**
 	 * @return the id
@@ -87,15 +96,34 @@ public class Client {
 		this.consultantClient = consultantClient;
 	}
 
+	/**
+	 * @return the interview
+	 */
+	public Interview getInterview() {
+		return interview;
+	}
+
+	/**
+	 * @param interview the interview to set
+	 */
+	public void setInterview(Interview interview) {
+		this.interview = interview;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", name=" + name + ", location=" + location
-				+ ", consultantClient=" + consultantClient + "]";
+				+ ", consultantClient=" + consultantClient + ", interview="
+				+ interview + "]";
 	}
 
+	
+
+	
+	
 
 
 }

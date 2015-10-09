@@ -11,8 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="vendor", 
@@ -30,11 +34,15 @@ public class Vendor {
 	@Column(name="location", length=40, unique=true, nullable=false)
 	private String location;
 
-	@ManyToMany(mappedBy="vendors", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy="vendors", fetch = FetchType.LAZY)
 	private Set<Consultant> consultants = new HashSet<Consultant>();
 
-	@OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
 	private Set<VendorContact> vendorContact;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "vendor")
+	@Cascade({CascadeType.ALL})
+	private Interview interview;
 
 	/**
 	 * @return the id
@@ -79,6 +87,20 @@ public class Vendor {
 	}
 
 	/**
+	 * @return the consultants
+	 */
+	public Set<Consultant> getConsultants() {
+		return consultants;
+	}
+
+	/**
+	 * @param consultants the consultants to set
+	 */
+	public void setConsultants(Set<Consultant> consultants) {
+		this.consultants = consultants;
+	}
+
+	/**
 	 * @return the vendorContact
 	 */
 	public Set<VendorContact> getVendorContact() {
@@ -93,27 +115,17 @@ public class Vendor {
 	}
 
 	/**
-	 * @return the consultants
+	 * @return the interview
 	 */
-	public Set<Consultant> getConsultants() {
-		return consultants;
+	public Interview getInterview() {
+		return interview;
 	}
 
 	/**
-	 * @param consultants the consultants to set
+	 * @param interview the interview to set
 	 */
-	public void setConsultants(Set<Consultant> consultants) {
-		this.consultants = consultants;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Vendor [id=" + id + ", vendorName=" + vendorName
-				+ ", location=" + location + ", consultants=" + consultants
-				+ ", vendorContact=" + vendorContact + "]";
+	public void setInterview(Interview interview) {
+		this.interview = interview;
 	}
 
 }

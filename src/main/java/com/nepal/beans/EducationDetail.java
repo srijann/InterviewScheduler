@@ -1,29 +1,30 @@
 package com.nepal.beans;
 
-import java.time.Year;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 
 
 @Entity
 @Table(name="education_detail", 
-uniqueConstraints={@UniqueConstraint(columnNames={"education_detail_id"})})
+uniqueConstraints={@UniqueConstraint(columnNames={"consultant_id"})})
 public class EducationDetail {
 
+	@GenericGenerator(name = "generator", strategy = "foreign", 
+	parameters = @Parameter(name = "property", value = "consultant"))
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="education_detail_id", nullable=false, unique=true, length=11)
+	@GeneratedValue(generator = "generator")
+	@Column(name = "consultant_id", unique = true, nullable = false)
 	private Long id;
 
 	@Column(name="institution_name", length=40, nullable=false)
@@ -35,8 +36,9 @@ public class EducationDetail {
 	@Column(name="graduated_year", length=4, nullable=false)
 	private Long graduateYear;
 
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "educationDetail")
-	private Set<Consultant> consultants = new HashSet<Consultant>();*/
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private  Consultant consultant;
 
 	/**
 	 * @return the id
@@ -95,33 +97,17 @@ public class EducationDetail {
 	}
 
 	/**
-	 * @return the consultants
+	 * @return the consultant
 	 */
-	/*public Set<Consultant> getConsultants() {
-		return consultants;
+	public Consultant getConsultant() {
+		return consultant;
 	}
 
-	*//**
-	 * @param consultants the consultants to set
-	 *//*
-	public void setConsultants(Set<Consultant> consultants) {
-		this.consultants = consultants;
-	}*/
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * @param consultant the consultant to set
 	 */
-	@Override
-	public String toString() {
-		return "EducationDetail [id=" + id + ", institutionName="
-				+ institutionName + ", location=" + location
-				+ ", graduateYear=" + graduateYear + ", consultants="
-				/*+ consultants */+ "]";
+	public void setConsultant(Consultant consultant) {
+		this.consultant = consultant;
 	}
-
-
-
-
-
 
 }

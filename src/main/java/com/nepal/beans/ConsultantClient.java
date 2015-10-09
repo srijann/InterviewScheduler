@@ -34,7 +34,7 @@ public class ConsultantClient {
 	@JoinColumn(name = "consultant_id")
 	private Consultant consultant;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "client_id")
 	private Client client;
 
@@ -107,16 +107,5 @@ public class ConsultantClient {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Consultant_Client [id=" + id + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", consultant=" + consultant
-				+ ", client=" + client + "]";
-	}
-
 
 }

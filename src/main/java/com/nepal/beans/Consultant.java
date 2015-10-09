@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -35,17 +37,17 @@ public class Consultant {
 	@Column(name="consultant_name", length=30, nullable=false)
 	private String name;
 
-	@Column(name="ssn", length=12, nullable=true)
+	@Column(name="ssn", length=12, nullable=true, unique=true)
 	private String ssn;
 
 	@Column(name="dob", length=10, nullable=true)
 	@Type(type="date")
 	private Date dob;
 
-	@Column(name="email", length=50, nullable=true)
+	@Column(name="email", length=50, nullable=true, unique=true)
 	private String email;
 
-	@Column(name="phone", length=20, nullable=true)
+	@Column(name="phone", length=20, nullable=true, unique=true)
 	private String phone;
 
 	@Column(name="yrs_exp", length=10, nullable=true)
@@ -53,21 +55,30 @@ public class Consultant {
 
 	@OneToMany(mappedBy = "consultant", fetch = FetchType.LAZY)
 	private Set<ConsultantClient> consultantClient = new HashSet<ConsultantClient>();
+	
+	@OneToMany(mappedBy = "consultant", fetch = FetchType.LAZY)
+	private Set<Interview> interview = new HashSet<Interview>();
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "sales_rep_id")
+	@Cascade({CascadeType.ALL})
+	private SalesRepresentative salesRep;
 
-	@ManyToOne
-	@JoinColumn(name="education_detail_id")
+	@OneToOne(mappedBy = "consultant", fetch = FetchType.LAZY)
 	@Cascade({CascadeType.ALL})
 	private EducationDetail educationDetail;
+	
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name="consultant_vendor", 
-			joinColumns={@JoinColumn(name="consultant_id", insertable = false, updatable = false)}, 
-			inverseJoinColumns={@JoinColumn(name="vendor_id", insertable = false, updatable = false)}
+			joinColumns={@JoinColumn(name="consultant_id")}, 
+			inverseJoinColumns={@JoinColumn(name="vendor_id")}
 			)
 	@Cascade({CascadeType.ALL})
 	private Set<Vendor> vendors = new HashSet<Vendor>();
-	
+
+
 	/**
 	 * @return the id
 	 */
@@ -197,6 +208,38 @@ public class Consultant {
 
 
 	/**
+	 * @return the interview
+	 */
+	public Set<Interview> getInterview() {
+		return interview;
+	}
+
+
+	/**
+	 * @param interview the interview to set
+	 */
+	public void setInterview(Set<Interview> interview) {
+		this.interview = interview;
+	}
+
+
+	/**
+	 * @return the salesRep
+	 */
+	public SalesRepresentative getSalesRep() {
+		return salesRep;
+	}
+
+
+	/**
+	 * @param salesRep the salesRep to set
+	 */
+	public void setSalesRep(SalesRepresentative salesRep) {
+		this.salesRep = salesRep;
+	}
+
+
+	/**
 	 * @return the educationDetail
 	 */
 	public EducationDetail getEducationDetail() {
@@ -228,16 +271,8 @@ public class Consultant {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Consultant [id=" + id + ", name=" + name + ", ssn=" + ssn
-				+ ", dob=" + dob + ", email=" + email + ", phone=" + phone
-				+ ", yrsExp=" + yrsExp + ", consultantClient="
-				+ consultantClient + ", educationDetail=" + educationDetail
-				+ ", vendors=" + vendors + "]";
-	}
+
+	
+	
 
 }

@@ -26,7 +26,7 @@ interviewSchedulerApp.config(function($stateProvider, $urlRouterProvider) {
 	.state('consultants', {
 		url: '/consultants',
 		templateUrl: 'resources/html/consultant/consultant.html',
-		controller: 'consultantController',
+		controller: 'consultant.controller',
 		resolve: {
 			/*message: function(consultantService){
 				var message = consultantService.getMessage();
@@ -49,7 +49,15 @@ interviewSchedulerApp.config(function($stateProvider, $urlRouterProvider) {
 
 	})
 	.state('login',{
-
+		url: '/login',
+		templateUrl:'resources/html/login/login.html',
+		controller: 'login.controller',
+		resolve: {
+			loginData : ['loginService', function(loginService){
+				return loginService.getUserInfo();
+			}]
+		}
+		
 	});
 
 });
