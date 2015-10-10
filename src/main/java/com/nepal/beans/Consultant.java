@@ -223,6 +223,17 @@ public class Consultant {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Consultant [id=" + id + ", name=" + name + ", ssn=" + ssn
+				+ ", dob=" + dob + ", email=" + email + ", phone=" + phone
+				+ ", yrsExp=" + yrsExp + "]";
+	}
+
+
 	/**
 	 * @return the salesRep
 	 */
