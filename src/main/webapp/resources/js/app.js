@@ -64,7 +64,10 @@ interviewSchedulerApp.config(function($stateProvider, $urlRouterProvider) {
 	})
 	
 	.state('login',{
-
-	});
+		url: '/login',
+		templateUrl: 'resources/html/user/user.html',
+		controller: 'userController'
+			
+	})
 	
 });

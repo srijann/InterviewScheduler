@@ -4,6 +4,16 @@
      
 <hibernate-mapping>
     <query name="getAllVendors">from Vendor</query>
+    
+    <query name="findUserByNameAndPassword">
+    	<![CDATA[
+    	FROM User 
+    	WHERE name = :userName
+    	AND password = :password
+    	]]> 
+    </query>
+ 
+ 	<query name="getAllUsers">FROM User</query>
  
     <!-- <query name="HQL_GET_EMPLOYEE_BY_ID">
         <![CDATA[from Employee where emp_id = :id]]>

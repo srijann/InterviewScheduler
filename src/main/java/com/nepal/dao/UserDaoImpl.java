@@ -2,6 +2,7 @@ package com.nepal.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,21 @@ public class UserDaoImpl implements UserDao {
 	@Transactional
 	public void deleteUser(User user) {
 		persistenceService.deleteEntity(user);
+	}
+
+	@SuppressWarnings("unchecked")
+	public User getUserByNameAndPwd(String userName, String password) {
+		User user = null;
+		if (userName != null && password != null) {
+			Query query = persistenceService.getSession().getNamedQuery("findUserByNameAndPassword");
+			query.setString("userName", userName);
+			query.setString("password", password);
+			List<User> users = (List<User>)query.list();
+			if (users != null && !users.isEmpty()) {
+				user = users.get(0);
+			}
+		}
+		return user;
 	}
 
 }

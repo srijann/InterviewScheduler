@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nepal.beans.Consultant;
 import com.nepal.service.ConsultantService;
 import com.nepal.service.PersistenceService;
+import com.nepal.service.UserService;
 
 @Controller
 public class ConsultantController {
@@ -27,6 +28,9 @@ public class ConsultantController {
 	
 	@Autowired
 	ConsultantService consultantService;
+	
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping(value = "/consultants", method = RequestMethod.GET)
 	public @ResponseBody List<Consultant> getConsultants(){

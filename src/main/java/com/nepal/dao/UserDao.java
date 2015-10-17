@@ -9,4 +9,5 @@ public interface UserDao {
 	List <User> getAllUsers();
 	void addUser(User user);
 	void deleteUser(User user);
+	User getUserByNameAndPwd(String userName, String password);
 }

@@ -6,9 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nepal.beans.User;
 import com.nepal.beans.Vendor;
 import com.nepal.dao.VendorDao;
 import com.nepal.service.ConsultantService;
+import com.nepal.service.UserService;
 
 @Controller
 //@RequestMapping("/")
@@ -20,6 +22,9 @@ public class IndexController {
 	
 	@Autowired
 	ConsultantService consultantService;
+	
+	@Autowired
+	UserService userService;
 	
 	
 	@RequestMapping("/")
@@ -34,7 +39,11 @@ public class IndexController {
 		vendorDao.addVendor(vendor);
 		vendorDao.getAllVendors();
 		vendorDao.deleteVendor(vendor);*/
-		consultantService.addConsultant();
+		//consultantService.addConsultant();
+		
+	/*	System.out.println("Inside User Controller");
+		User user = userService.getUserByNameAndPwd("srijan", "kathmandu");
+		System.out.println(user != null ? user.getId() : "No user with such un and pwd");*/
 		return "index";
 	}
 	

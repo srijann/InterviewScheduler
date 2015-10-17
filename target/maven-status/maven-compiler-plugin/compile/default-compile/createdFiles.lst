@@ -15,6 +15,7 @@ com\nepal\beans\SalesRepresentative.class
 com\nepal\beans\Interview.class
 com\nepal\beans\User.class
 com\nepal\dao\EducationalDetailDao.class
+com\nepal\service\UserServiceImpl.class
 com\nepal\dao\SalesRepresentativeDao.class
 com\nepal\dao\UserDaoImpl.class
 com\nepal\service\ConsultantServiceImpl.class
@@ -26,6 +27,7 @@ com\nepal\dao\InterviewDaoImpl.class
 com\nepal\dao\InterviewDao.class
 com\nepal\dao\VendorDao.class
 com\nepal\dao\VendorDaoImpl.class
+com\nepal\service\UserService.class
 com\nepal\beans\VendorContact.class
 com\nepal\controller\UserController.class
 com\nepal\dao\ConsultantDao.class
